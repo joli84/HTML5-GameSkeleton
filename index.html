@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>GameSkeleton</title>
+
+    <style>
+        canvas {
+            display: block;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var canvas, ctx, width, height;
+
+    function onpress (evt)
+    {
+        var mx = evt.offsetX, my = evt.offsetY;
+        console.log("x: "+mx+" y: "+my);
+    }
+    function main()
+    {
+        canvas = document.createElement("canvas");
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        var evt = "touchstart";
+        if(width >= 500)
+        {
+            width = 320;
+            height = 480;
+            canvas.style.border = "1px solid #000";
+            evt = "mousedown";
+        }
+
+        document.addEventListener(evt, onpress);
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx = canvas.getContext("2d");
+
+        document.body.appendChild(canvas);
+
+        // load sprite
+        run();
+    }
+
+    function run()
+    {
+        var loop = function ()
+        {
+            update();
+            render();
+            window.requestAnimationFrame(loop, canvas);
+        }
+        window.requestAnimationFrame(loop, canvas);
+    }
+
+    function update()
+    {
+
+    }
+
+    function render()
+    {
+        ctx.fillRect(10, 10, 10, 10);
+    }
+
+    main();
+</script>
+</body>
+</html>
